@@ -24,7 +24,8 @@ HANDLE = "tom401"  # solved.ac(백준) 아이디
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 README = os.path.join(ROOT, "README.md")
 
-HEADER_RE = re.compile(r"^#\s*\[(?P<level>[^\]]+)\]")
+HEADER_RE = re.compile(r"^#\s*\[(?P<level>[^\]]+)\].*?-\s*(?P<id>\d+)\s*$")
+SNAPSHOT = os.path.join(ROOT, ".github", "stats", "solved.json")
 SOLVEDAC_API = "https://solved.ac/api/v3"
 ROMAN = ["V", "IV", "III", "II", "I"]
 BOJ_TIERS = ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "Ruby"]
@@ -86,7 +87,13 @@ def tier_name(n):
 
 
 def collect():
-    counts = {"boj": Counter(), "prg": Counter(), "swea": Counter(), "etc": Counter()}
+    """프로그래머스/SWEA: 스냅샷(solved.json) + 레포에 올라온 풀이를 문제 번호 기준으로 합친다."""
+    solved = {"prg": {}, "swea": {}}
+    if os.path.exists(SNAPSHOT):
+        with open(SNAPSHOT, encoding="utf-8") as f:
+            snap = json.load(f)
+        solved["prg"].update(snap.get("programmers", {}))
+        solved["swea"].update(snap.get("swea", {}))
     for top in os.listdir(ROOT):
         top_dir = os.path.join(ROOT, top)
         if top.startswith(".") or not os.path.isdir(top_dir):
@@ -95,11 +102,12 @@ def collect():
             if "README.md" not in files:
                 continue
             with open(os.path.join(dirpath, "README.md"), encoding="utf-8") as f:
-                m = HEADER_RE.match(f.readline())
+                m = HEADER_RE.match(f.readline().strip())
             if m:
                 platform, grade = classify(m["level"])
-                counts[platform][grade] += 1
-    return counts
+                if platform in solved:
+                    solved[platform][m["id"]] = grade
+    return {k: Counter(v.values()) for k, v in solved.items()}
 
 
 def table(cells):

@@ -37,7 +37,7 @@ GitHub Actions가 solved.ac와 연동해 아래 **티어 · 스트릭 · 풀이 
 </div>
 
 <!-- STATS:START -->
-**🧩 지금까지 총 275문제를 풀었어요!**
+**🧩 지금까지 총 354문제를 풀었어요!**
 
 #### Baekjoon
 | Total | <img src=".github/assets/tier/5.svg" height="18"/><br>Bronze | <img src=".github/assets/tier/10.svg" height="18"/><br>Silver | <img src=".github/assets/tier/15.svg" height="18"/><br>Gold | <img src=".github/assets/tier/20.svg" height="18"/><br>Platinum | <img src=".github/assets/tier/25.svg" height="18"/><br>Diamond | <img src=".github/assets/tier/30.svg" height="18"/><br>Ruby |
@@ -47,12 +47,12 @@ GitHub Actions가 solved.ac와 연동해 아래 **티어 · 스트릭 · 풀이 
 #### Programmers
 | Total | Lv.0 | Lv.1 | Lv.2 | Lv.3 | Lv.4 | Lv.5 |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **0** | **0** | **0** | **0** | **0** | **0** | **0** |
+| **18** | **1** | **6** | **11** | **0** | **0** | **0** |
 
 #### SWEA
 | Total | D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8 |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** |
+| **61** | **1** | **31** | **22** | **7** | **0** | **0** | **0** | **0** |
 <!-- STATS:END -->
 
 ## 🗂️ Structure
