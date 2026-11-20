@@ -18,7 +18,11 @@
 
 코딩테스트 대비를 위해 알고리즘 문제를 풀고 기록하는 저장소입니다.
 [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub)로 **Baekjoon, Programmers, SWEA**에서 맞은 풀이를 자동으로 커밋하고,
-GitHub Actions가 아래 **풀이 통계를 자동으로 갱신**합니다.
+GitHub Actions가 solved.ac와 연동해 아래 **티어 · 스트릭 · 풀이 통계를 매일 자동으로 갱신**합니다.
+
+> [!NOTE]
+> **📅 2026.11.20부터 풀이 코드 업로드를 시작했습니다.**
+> 그 이전에 푼 문제는 코드 없이 아래 Stats 통계에만 반영되어 있습니다.
 
 ## 📊 Stats
 
@@ -26,25 +30,33 @@ GitHub Actions가 아래 **풀이 통계를 자동으로 갱신**합니다.
 
 <a href="https://solved.ac/tom401"><img src="https://mazassumnida.wtf/api/v2/generate_badge?boj=tom401" alt="solved.ac tier"/></a>
 
+<!-- SOLVEDAC:START -->
+<h3>🧊 오늘 한 문제 풀고 스트릭을 시작해요!</h3>
+
+| 현재 티어 | AC Rating | 푼 문제 | 현재 스트릭 | 최장 스트릭 |
+|:---:|:---:|:---:|:---:|:---:|
+| <img src=".github/assets/tier/12.svg" height="18"/> **Gold IV** | **1020** | **275** | **0일** | **5일** |
+<!-- SOLVEDAC:END -->
+
 </div>
 
 <!-- STATS:START -->
-**🧩 지금까지 총 1문제를 풀었어요!**
+**🧩 지금까지 총 354문제를 풀었어요!**
 
 #### Baekjoon
-| Total | <img src="https://static.solved.ac/tier_small/5.svg" height="18"/><br>Bronze | <img src="https://static.solved.ac/tier_small/10.svg" height="18"/><br>Silver | <img src="https://static.solved.ac/tier_small/15.svg" height="18"/><br>Gold | <img src="https://static.solved.ac/tier_small/20.svg" height="18"/><br>Platinum | <img src="https://static.solved.ac/tier_small/25.svg" height="18"/><br>Diamond | <img src="https://static.solved.ac/tier_small/30.svg" height="18"/><br>Ruby |
+| Total | <img src=".github/assets/tier/5.svg" height="18"/><br>Bronze | <img src=".github/assets/tier/10.svg" height="18"/><br>Silver | <img src=".github/assets/tier/15.svg" height="18"/><br>Gold | <img src=".github/assets/tier/20.svg" height="18"/><br>Platinum | <img src=".github/assets/tier/25.svg" height="18"/><br>Diamond | <img src=".github/assets/tier/30.svg" height="18"/><br>Ruby |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **1** | **0** | **1** | **0** | **0** | **0** | **0** |
+| **275** | **165** | **93** | **17** | **0** | **0** | **0** |
 
 #### Programmers
 | Total | Lv.0 | Lv.1 | Lv.2 | Lv.3 | Lv.4 | Lv.5 |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **0** | **0** | **0** | **0** | **0** | **0** | **0** |
+| **18** | **1** | **6** | **11** | **0** | **0** | **0** |
 
 #### SWEA
 | Total | D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8 |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** |
+| **61** | **1** | **31** | **22** | **7** | **0** | **0** | **0** | **0** |
 <!-- STATS:END -->
 
 ## 🗂️ Structure
