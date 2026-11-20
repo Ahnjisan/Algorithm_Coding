@@ -18,7 +18,7 @@
 
 코딩테스트 대비를 위해 알고리즘 문제를 풀고 기록하는 저장소입니다.
 [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub)로 **Baekjoon, Programmers, SWEA**에서 맞은 풀이를 자동으로 커밋하고,
-GitHub Actions가 solved.ac와 연동해 아래 **티어 · 스트릭 · 풀이 통계를 매일 자동으로 갱신**합니다.
+GitHub Actions가 solved.ac와 연동해 아래 **티어 · 스트릭 · 풀이 통계를 매시간 자동으로 갱신**합니다.
 
 > [!NOTE]
 > **📅 2026.11.20부터 풀이 코드 업로드를 시작했습니다.**

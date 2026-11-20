@@ -6,9 +6,8 @@ on:
     paths-ignore:
       - README.md
   schedule:
-    # solved.ac 날짜는 매일 06:00(KST)에 바뀐다 → 06:13, 23:13 KST에 스트릭 갱신
-    - cron: "13 21 * * *"
-    - cron: "13 14 * * *"
+    # 매시간 solved.ac 티어·푼 문제 수·스트릭 확인 (바뀐 게 있을 때만 커밋)
+    - cron: "13 * * * *"
   workflow_dispatch:
 
 permissions:
