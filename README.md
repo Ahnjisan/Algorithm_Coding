@@ -31,7 +31,7 @@ GitHub Actions가 solved.ac와 연동해 아래 **티어 · 스트릭 · 풀이 
 
 | 현재 티어 | AC Rating | 푼 문제 | 현재 스트릭 | 최장 스트릭 |
 |:---:|:---:|:---:|:---:|:---:|
-| <img src="https://static.solved.ac/tier_small/12.svg" height="18"/> **Gold IV** | **1020** | **275** | **0일** | **5일** |
+| <img src=".github/assets/tier/12.svg" height="18"/> **Gold IV** | **1020** | **275** | **0일** | **5일** |
 <!-- SOLVEDAC:END -->
 
 </div>
@@ -40,7 +40,7 @@ GitHub Actions가 solved.ac와 연동해 아래 **티어 · 스트릭 · 풀이 
 **🧩 지금까지 총 275문제를 풀었어요!**
 
 #### Baekjoon
-| Total | <img src="https://static.solved.ac/tier_small/5.svg" height="18"/><br>Bronze | <img src="https://static.solved.ac/tier_small/10.svg" height="18"/><br>Silver | <img src="https://static.solved.ac/tier_small/15.svg" height="18"/><br>Gold | <img src="https://static.solved.ac/tier_small/20.svg" height="18"/><br>Platinum | <img src="https://static.solved.ac/tier_small/25.svg" height="18"/><br>Diamond | <img src="https://static.solved.ac/tier_small/30.svg" height="18"/><br>Ruby |
+| Total | <img src=".github/assets/tier/5.svg" height="18"/><br>Bronze | <img src=".github/assets/tier/10.svg" height="18"/><br>Silver | <img src=".github/assets/tier/15.svg" height="18"/><br>Gold | <img src=".github/assets/tier/20.svg" height="18"/><br>Platinum | <img src=".github/assets/tier/25.svg" height="18"/><br>Diamond | <img src=".github/assets/tier/30.svg" height="18"/><br>Ruby |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **275** | **165** | **93** | **17** | **0** | **0** | **0** |
 

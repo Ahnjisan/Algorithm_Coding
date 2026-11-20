@@ -20,6 +20,7 @@ import urllib.request
 from collections import Counter
 
 HANDLE = "tom401"  # solved.ac(백준) 아이디
+# 티어 아이콘은 GitHub 이미지 프록시가 solved.ac에 접속하지 못해 레포에 저장해 둔 사본(.github/assets/tier)을 쓴다.
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 README = os.path.join(ROOT, "README.md")
 
@@ -116,7 +117,7 @@ def render_solvedac(sa):
         f"<h3>{fire} {msg}</h3>",
         "",
         table([
-            ("현재 티어", f'<img src="https://static.solved.ac/tier_small/{sa["tier"]}.svg" height="18"/> **{tier_name(sa["tier"])}**'),
+            ("현재 티어", f'<img src=".github/assets/tier/{sa["tier"]}.svg" height="18"/> **{tier_name(sa["tier"])}**'),
             ("AC Rating", f"**{sa['rating']}**"),
             ("푼 문제", f"**{sa['solved']}**"),
             ("현재 스트릭", f"**{streak}일**"),
@@ -133,7 +134,7 @@ def render_stats(counts, sa):
     blocks.append(
         "#### Baekjoon\n" + table(
             [("Total", f"**{sa['solved']}**")]
-            + [(f'<img src="https://static.solved.ac/tier_small/{BOJ_ICON[t]}.svg" height="18"/><br>{t}',
+            + [(f'<img src=".github/assets/tier/{BOJ_ICON[t]}.svg" height="18"/><br>{t}',
                 f"**{boj[t]}**") for t in BOJ_TIERS]
         )
     )
