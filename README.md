@@ -20,6 +20,10 @@
 [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub)로 **Baekjoon, Programmers, SWEA**에서 맞은 풀이를 자동으로 커밋하고,
 GitHub Actions가 solved.ac와 연동해 아래 **티어 · 스트릭 · 풀이 통계를 매일 자동으로 갱신**합니다.
 
+> [!NOTE]
+> **📅 2026.11.20부터 풀이 코드 업로드를 시작했습니다.**
+> 그 이전에 푼 문제는 코드 없이 아래 Stats 통계에만 반영되어 있습니다.
+
 ## 📊 Stats
 
 <div align="center">
