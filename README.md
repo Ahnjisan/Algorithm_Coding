@@ -8,10 +8,6 @@
   <a href="https://github.com/BaekjoonHub/BaekjoonHub"><img src="https://img.shields.io/badge/BaekjoonHub-Auto%20Push-2ea44f?style=for-the-badge&logo=github&logoColor=white"/></a>
 </p>
 
-<!-- solved.ac 프로필 배지: 아래 YOUR_HANDLE을 백준 아이디로 바꾸고 주석을 풀어주세요.
-<a href="https://solved.ac/YOUR_HANDLE"><img src="http://mazassumnida.wtf/api/v2/generate_badge?boj=YOUR_HANDLE"/></a>
--->
-
 **매일 한 문제씩, 꾸준히 🔥**
 
 </div>
@@ -21,23 +17,35 @@
 ## 📌 About
 
 코딩테스트 대비를 위해 알고리즘 문제를 풀고 기록하는 저장소입니다.
-[BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub)로 백준에서 맞은 풀이를 자동으로 커밋하고,
-GitHub Actions가 아래 **문제 목록과 통계를 자동으로 갱신**합니다.
+[BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub)로 **Baekjoon, Programmers, SWEA**에서 맞은 풀이를 자동으로 커밋하고,
+GitHub Actions가 아래 **풀이 통계를 자동으로 갱신**합니다.
 
 ## 📊 Stats
 
+<div align="center">
+
+<a href="https://solved.ac/tom401"><img src="https://mazassumnida.wtf/api/v2/generate_badge?boj=tom401" alt="solved.ac tier"/></a>
+
+</div>
+
 <!-- STATS:START -->
-| 🧩 **총 1문제** | ⚪ Silver **1** |
-|:---:|:---:|
+**🧩 지금까지 총 1문제를 풀었어요!**
+
+#### Baekjoon
+| Total | <img src="https://static.solved.ac/tier_small/5.svg" height="18"/><br>Bronze | <img src="https://static.solved.ac/tier_small/10.svg" height="18"/><br>Silver | <img src="https://static.solved.ac/tier_small/15.svg" height="18"/><br>Gold | <img src="https://static.solved.ac/tier_small/20.svg" height="18"/><br>Platinum | <img src="https://static.solved.ac/tier_small/25.svg" height="18"/><br>Diamond | <img src="https://static.solved.ac/tier_small/30.svg" height="18"/><br>Ruby |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **1** | **0** | **1** | **0** | **0** | **0** | **0** |
+
+#### Programmers
+| Total | Lv.0 | Lv.1 | Lv.2 | Lv.3 | Lv.4 | Lv.5 |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **0** | **0** | **0** | **0** | **0** | **0** | **0** |
+
+#### SWEA
+| Total | D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8 |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** | **0** |
 <!-- STATS:END -->
-
-## 📚 Problems
-
-<!-- PROBLEMS:START -->
-| # | 플랫폼 | 난이도 | 문제 | 분류 | 언어 | 풀이 | 날짜 |
-|:-:|:-:|:--|:--|:--|:-:|:-:|:-:|
-| 1 | 백준 | <img src="https://static.solved.ac/tier_small/8.svg" height="16"/> Silver III | [1003. 피보나치 함수](https://www.acmicpc.net/problem/1003) | 다이나믹 프로그래밍 | Python | [📝](%EB%B0%B1%EC%A4%80/Silver/1003.%E2%80%85%ED%94%BC%EB%B3%B4%EB%82%98%EC%B9%98%E2%80%85%ED%95%A8%EC%88%98/%ED%94%BC%EB%B3%B4%EB%82%98%EC%B9%98%E2%80%85%ED%95%A8%EC%88%98.py) | 2026.11.20 |
-<!-- PROBLEMS:END -->
 
 ## 🗂️ Structure
 
@@ -50,6 +58,8 @@ GitHub Actions가 아래 **문제 목록과 통계를 자동으로 갱신**합�
  ┃ ┃    ┣ 📜 README.md        # 문제 설명 · 성능 요약 · 분류
  ┃ ┃    ┗ 🐍 피보나치 함수.py  # 풀이 코드
  ┃ ┗ 📂 Gold ...
+ ┣ 📂 프로그래머스
+ ┣ 📂 SWEA
  ┗ 📂 .github                  # README 자동 갱신 스크립트 & 워크플로
 ```
 
