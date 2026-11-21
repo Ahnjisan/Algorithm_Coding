@@ -13,11 +13,13 @@ README.md 안의 아래 마커 사이 내용만 다시 쓴다.
     SWEA          "# [D3] 숫자 배열 회전 - 1961"
 """
 import json
+import subprocess
 import os
 import re
 import sys
 import urllib.request
 from collections import Counter
+from datetime import date, datetime, timedelta, timezone
 
 HANDLE = "tom401"  # solved.ac(백준) 아이디
 # 티어 아이콘은 GitHub 이미지 프록시가 solved.ac에 접속하지 못해 레포에 저장해 둔 사본(.github/assets/tier)을 쓴다.
@@ -26,6 +28,8 @@ README = os.path.join(ROOT, "README.md")
 
 HEADER_RE = re.compile(r"^#\s*\[(?P<level>[^\]]+)\].*?-\s*(?P<id>\d+)\s*$")
 SNAPSHOT = os.path.join(ROOT, ".github", "stats", "solved.json")
+SOLVEDAC_CACHE = os.path.join(ROOT, ".github", "stats", "solvedac.json")
+KST = timezone(timedelta(hours=9))
 SOLVEDAC_API = "https://solved.ac/api"
 ROMAN = ["V", "IV", "III", "II", "I"]
 BOJ_TIERS = ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "Ruby"]
@@ -60,16 +64,48 @@ def fetch(path):
 
 
 def fetch_solvedac():
-    """solved.ac에서 프로필, 스트릭, 티어별 푼 문제 수를 가져온다.
+    """solved.ac 티어·레이팅·티어별 푼 문제 수.
 
-    solved.ac 프로필 페이지가 쓰는 v4 API를 우선 사용한다.
-    (v3 API는 갱신이 멈춰 스트릭·레이팅이 예전 값으로 남아 있음)
+    1) v4 API (프로필 페이지와 같은 값) → 성공하면 캐시에 저장
+    2) GitHub Actions에서는 v4가 403으로 막혀 있으므로 캐시(.github/stats/solvedac.json)를 쓰고,
+       v3가 캐시보다 많은 푼 문제 수를 주면(= 새 풀이가 반영되면) v3 값을 쓴다.
     """
     try:
-        return fetch_v4()
+        sa = fetch_v4()
+        save_cache(sa)
+        return sa
     except Exception as e:
-        print(f"v4 API 실패, v3로 재시도합니다: {e}", file=sys.stderr)
-        return fetch_v3()
+        print(f"v4 API 실패: {e}", file=sys.stderr)
+    cache = load_cache()
+    try:
+        v3 = fetch_v3()
+        if cache is None or v3["solved"] > cache["solved"]:
+            return v3
+    except Exception as e:
+        print(f"v3 API 실패: {e}", file=sys.stderr)
+        if cache is None:
+            raise
+    return cache
+
+
+def load_cache():
+    if not os.path.exists(SOLVEDAC_CACHE):
+        return None
+    with open(SOLVEDAC_CACHE, encoding="utf-8") as f:
+        c = json.load(f)
+    return {**c, "by_tier": Counter(c["by_tier"])}
+
+
+def save_cache(sa):
+    data = {
+        "_comment": "solved.ac v4 API에서 마지막으로 확인된 값",
+        "checked": datetime.now(KST).date().isoformat(),
+        "tier": sa["tier"], "rating": sa["rating"], "solved": sa["solved"],
+        "by_tier": {t: sa["by_tier"][t] for t in BOJ_TIERS},
+    }
+    with open(SOLVEDAC_CACHE, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+        f.write("\n")
 
 
 def tiers_from_levels(counts_by_level):
@@ -88,22 +124,17 @@ def fetch_v4():
         "tier": user["tier"],
         "rating": user["rating"],
         "solved": user["solvedCount"],
-        "current_streak": user["currentStreak"],
-        "longest_streak": user["maxStreak"],
         "by_tier": tiers_from_levels(enumerate(hist)),
     }
 
 
 def fetch_v3():
     user = fetch(f"/v3/user/show?handle={HANDLE}")
-    grass = fetch(f"/v3/user/grass?handle={HANDLE}&topic=default")
     stats = fetch(f"/v3/user/problem_stats?handle={HANDLE}")
     return {
         "tier": user["tier"],
         "rating": user["rating"],
         "solved": user["solvedCount"],
-        "current_streak": grass.get("currentStreak", 0),
-        "longest_streak": grass.get("longestStreak", user.get("maxStreak", 0)),
         "by_tier": tiers_from_levels((r["level"], r["solved"]) for r in stats),
     }
 
@@ -147,20 +178,53 @@ def table(cells):
     return "\n".join([head, sep, body])
 
 
-def render_solvedac(sa):
-    streak = sa["current_streak"]
-    fire = "🔥" if streak else "🧊"
-    msg = f"{streak}일 연속 문제 해결 중!" if streak else "오늘 한 문제 풀고 스트릭을 시작해요!"
+def solve_days():
+    """BaekjoonHub 커밋 시각(KST) 기준으로 문제를 푼 날짜 집합."""
+    out = subprocess.run(
+        ["git", "log", "--format=%at", "--grep=-BaekjoonHub"],
+        cwd=ROOT, capture_output=True, text=True, check=True,
+    ).stdout.split()
+    return {datetime.fromtimestamp(int(t), KST).date() for t in out}
+
+
+def streaks(days, today):
+    """(현재 스트릭, 최장 스트릭, 오늘 풀었는지). 오늘 아직 안 풀었으면 어제까지 이어진 스트릭을 유지한다."""
+    longest = run = 0
+    prev = None
+    for d in sorted(days):
+        run = run + 1 if prev and d - prev == timedelta(days=1) else 1
+        longest = max(longest, run)
+        prev = d
+    solved_today = today in days
+    d = today if solved_today else today - timedelta(days=1)
+    current = 0
+    while d in days:
+        current += 1
+        d -= timedelta(days=1)
+    return current, longest, solved_today
+
+
+def render_solvedac(sa, today=None):
+    today = today or datetime.now(KST).date()
+    current, longest, solved_today = streaks(solve_days(), today)
+    if current and solved_today:
+        head = f"🔥 {current}일 연속 문제 해결 중!"
+    elif current:
+        head = f"⏳ {current}일 연속! 오늘도 한 문제 풀고 이어가요"
+    else:
+        head = "🧊 오늘 한 문제 풀고 스트릭을 시작해요!"
     return "\n".join([
-        f"<h3>{fire} {msg}</h3>",
+        f"<h3>{head}</h3>",
         "",
         table([
             ("현재 티어", f'<img src=".github/assets/tier/{sa["tier"]}.svg" height="18"/> **{tier_name(sa["tier"])}**'),
             ("AC Rating", f"**{sa['rating']}**"),
             ("푼 문제", f"**{sa['solved']}**"),
-            ("현재 스트릭", f"**{streak}일**"),
-            ("최장 스트릭", f"**{sa['longest_streak']}일**"),
+            ("현재 스트릭", f"**{current}일**"),
+            ("최장 스트릭", f"**{longest}일**"),
         ]),
+        "",
+        "<sub>티어 · 레이팅 · 푼 문제는 solved.ac 기준, 스트릭은 Baekjoon · Programmers · SWEA 풀이 업로드(2026.11.20~) 기준</sub>",
     ])
 
 

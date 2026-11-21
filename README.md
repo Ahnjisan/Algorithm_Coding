@@ -31,11 +31,13 @@ GitHub Actions가 solved.ac와 연동해 아래 **티어 · 스트릭 · 풀이 
 <a href="https://solved.ac/tom401"><img src="https://mazassumnida.wtf/api/v2/generate_badge?boj=tom401" alt="solved.ac tier"/></a>
 
 <!-- SOLVEDAC:START -->
-<h3>🧊 오늘 한 문제 풀고 스트릭을 시작해요!</h3>
+<h3>🔥 2일 연속 문제 해결 중!</h3>
 
 | 현재 티어 | AC Rating | 푼 문제 | 현재 스트릭 | 최장 스트릭 |
 |:---:|:---:|:---:|:---:|:---:|
-| <img src=".github/assets/tier/12.svg" height="18"/> **Gold IV** | **1020** | **275** | **0일** | **5일** |
+| <img src=".github/assets/tier/12.svg" height="18"/> **Gold IV** | **1032** | **275** | **2일** | **2일** |
+
+<sub>티어 · 레이팅 · 푼 문제는 solved.ac 기준, 스트릭은 Baekjoon · Programmers · SWEA 풀이 업로드(2026.11.20~) 기준</sub>
 <!-- SOLVEDAC:END -->
 
 </div>
@@ -46,7 +48,7 @@ GitHub Actions가 solved.ac와 연동해 아래 **티어 · 스트릭 · 풀이 
 #### Baekjoon
 | Total | <img src=".github/assets/tier/5.svg" height="18"/><br>Bronze | <img src=".github/assets/tier/10.svg" height="18"/><br>Silver | <img src=".github/assets/tier/15.svg" height="18"/><br>Gold | <img src=".github/assets/tier/20.svg" height="18"/><br>Platinum | <img src=".github/assets/tier/25.svg" height="18"/><br>Diamond | <img src=".github/assets/tier/30.svg" height="18"/><br>Ruby |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **275** | **165** | **93** | **17** | **0** | **0** | **0** |
+| **275** | **165** | **92** | **17** | **0** | **0** | **0** |
 
 #### Programmers
 | Total | Lv.0 | Lv.1 | Lv.2 | Lv.3 | Lv.4 | Lv.5 |
