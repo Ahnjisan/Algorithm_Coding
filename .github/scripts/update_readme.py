@@ -26,7 +26,7 @@ README = os.path.join(ROOT, "README.md")
 
 HEADER_RE = re.compile(r"^#\s*\[(?P<level>[^\]]+)\].*?-\s*(?P<id>\d+)\s*$")
 SNAPSHOT = os.path.join(ROOT, ".github", "stats", "solved.json")
-SOLVEDAC_API = "https://solved.ac/api/v3"
+SOLVEDAC_API = "https://solved.ac/api"
 ROMAN = ["V", "IV", "III", "II", "I"]
 BOJ_TIERS = ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "Ruby"]
 # solved.ac 티어 아이콘 번호 (각 티어의 I 등급)
@@ -60,21 +60,51 @@ def fetch(path):
 
 
 def fetch_solvedac():
-    """solved.ac에서 프로필, 스트릭, 티어별 푼 문제 수를 가져온다."""
-    user = fetch(f"/user/show?handle={HANDLE}")
-    grass = fetch(f"/user/grass?handle={HANDLE}&topic=default")
-    stats = fetch(f"/user/problem_stats?handle={HANDLE}")
+    """solved.ac에서 프로필, 스트릭, 티어별 푼 문제 수를 가져온다.
+
+    solved.ac 프로필 페이지가 쓰는 v4 API를 우선 사용한다.
+    (v3 API는 갱신이 멈춰 스트릭·레이팅이 예전 값으로 남아 있음)
+    """
+    try:
+        return fetch_v4()
+    except Exception as e:
+        print(f"v4 API 실패, v3로 재시도합니다: {e}", file=sys.stderr)
+        return fetch_v3()
+
+
+def tiers_from_levels(counts_by_level):
+    """난이도 레벨(1~30)별 개수 -> Bronze~Ruby별 개수."""
     by_tier = Counter()
-    for row in stats:
-        if 1 <= row["level"] <= 30:
-            by_tier[BOJ_TIERS[(row["level"] - 1) // 5]] += row["solved"]
+    for level, n in counts_by_level:
+        if 1 <= level <= 30:
+            by_tier[BOJ_TIERS[(level - 1) // 5]] += n
+    return by_tier
+
+
+def fetch_v4():
+    user = fetch(f"/v4/users/{HANDLE}")
+    hist = user["ratingProblemsHistogram"]  # index = 난이도 레벨(0~30)
+    return {
+        "tier": user["tier"],
+        "rating": user["rating"],
+        "solved": user["solvedCount"],
+        "current_streak": user["currentStreak"],
+        "longest_streak": user["maxStreak"],
+        "by_tier": tiers_from_levels(enumerate(hist)),
+    }
+
+
+def fetch_v3():
+    user = fetch(f"/v3/user/show?handle={HANDLE}")
+    grass = fetch(f"/v3/user/grass?handle={HANDLE}&topic=default")
+    stats = fetch(f"/v3/user/problem_stats?handle={HANDLE}")
     return {
         "tier": user["tier"],
         "rating": user["rating"],
         "solved": user["solvedCount"],
         "current_streak": grass.get("currentStreak", 0),
         "longest_streak": grass.get("longestStreak", user.get("maxStreak", 0)),
-        "by_tier": by_tier,
+        "by_tier": tiers_from_levels((r["level"], r["solved"]) for r in stats),
     }
 
 

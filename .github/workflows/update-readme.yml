@@ -27,8 +27,23 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Regenerate problem list
+      - name: Update README stats
         run: python .github/scripts/update_readme.py
+
+      # 백준에서 맞은 직후에는 solved.ac 반영이 늦을 수 있다.
+      # 풀이가 올라온 경우(push) 반영될 때까지 5분 간격으로 최대 30분 다시 확인한다.
+      - name: Wait for solved.ac to catch up
+        if: github.event_name == 'push'
+        run: |
+          for i in 1 2 3 4 5 6; do
+            if ! git diff --quiet README.md; then
+              echo "README changed"
+              break
+            fi
+            echo "solved.ac 반영 대기 중... ($i/6)"
+            sleep 300
+            python .github/scripts/update_readme.py
+          done
 
       - name: Commit changes
         run: |
