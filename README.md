@@ -31,11 +31,11 @@ GitHub Actions가 solved.ac와 연동해 아래 **티어 · 스트릭 · 풀이 
 <a href="https://solved.ac/tom401"><img src="https://mazassumnida.wtf/api/v2/generate_badge?boj=tom401" alt="solved.ac tier"/></a>
 
 <!-- SOLVEDAC:START -->
-<h3>🔥 4일 연속 문제 해결 중!</h3>
+<h3>🔥 5일 연속 문제 해결 중!</h3>
 
 | 현재 티어 | AC Rating | 푼 문제 | 현재 스트릭 | 최장 스트릭 |
 |:---:|:---:|:---:|:---:|:---:|
-| <img src=".github/assets/tier/12.svg" height="18"/> **Gold IV** | **1032** | **275** | **4일** | **4일** |
+| <img src=".github/assets/tier/12.svg" height="18"/> **Gold IV** | **1032** | **275** | **5일** | **5일** |
 
 <sub>티어 · 레이팅 · 푼 문제는 solved.ac 기준, 스트릭은 Baekjoon · Programmers · SWEA 풀이 업로드(2026.11.20~) 기준</sub>
 <!-- SOLVEDAC:END -->
