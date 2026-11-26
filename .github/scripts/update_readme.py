@@ -148,11 +148,16 @@ def tier_name(n):
 
 
 def collect():
-    """프로그래머스/SWEA: 스냅샷(solved.json) + 레포에 올라온 풀이를 문제 번호 기준으로 합친다."""
-    solved = {"prg": {}, "swea": {}}
+    """스냅샷(solved.json) + 레포에 올라온 풀이를 플랫폼별 문제 번호 기준으로 합친다.
+
+    GitHub Actions에서는 solved.ac 최신 데이터(v4 API)를 읽을 수 없으므로,
+    백준도 서비스 종료 전 solved.ac 기록(275문제)에 BaekjoonHub 업로드를 더해서 센다.
+    """
+    solved = {"boj": {}, "prg": {}, "swea": {}}
     if os.path.exists(SNAPSHOT):
         with open(SNAPSHOT, encoding="utf-8") as f:
             snap = json.load(f)
+        solved["boj"].update(snap.get("baekjoon", {}))
         solved["prg"].update(snap.get("programmers", {}))
         solved["swea"].update(snap.get("swea", {}))
     for top in os.listdir(ROOT):
@@ -204,7 +209,7 @@ def streaks(days, today):
     return current, longest, solved_today
 
 
-def render_solvedac(sa, today=None):
+def render_solvedac(sa, boj_solved, today=None):
     today = today or datetime.now(KST).date()
     current, longest, solved_today = streaks(solve_days(), today)
     if current and solved_today:
@@ -219,23 +224,22 @@ def render_solvedac(sa, today=None):
         table([
             ("현재 티어", f'<img src=".github/assets/tier/{sa["tier"]}.svg" height="18"/> **{tier_name(sa["tier"])}**'),
             ("AC Rating", f"**{sa['rating']}**"),
-            ("푼 문제", f"**{sa['solved']}**"),
+            ("푼 문제", f"**{boj_solved}**"),
             ("현재 스트릭", f"**{current}일**"),
             ("최장 스트릭", f"**{longest}일**"),
         ]),
         "",
-        "<sub>티어 · 레이팅 · 푼 문제는 solved.ac 기준, 스트릭은 Baekjoon · Programmers · SWEA 풀이 업로드(2026.11.20~) 기준</sub>",
+        "<sub>티어 · 레이팅: solved.ac 기준 · 푼 문제: solved.ac 기록(~2026.04) + 풀이 업로드 · 스트릭: 풀이 업로드(2026.11.20~) 기준</sub>",
     ])
 
 
-def render_stats(counts, sa):
-    boj = sa["by_tier"]
-    prg, swea = counts["prg"], counts["swea"]
-    total = sa["solved"] + sum(prg.values()) + sum(swea.values())
+def render_stats(counts):
+    boj, prg, swea = counts["boj"], counts["prg"], counts["swea"]
+    total = sum(boj.values()) + sum(prg.values()) + sum(swea.values())
     blocks = [f"**🧩 지금까지 총 {total}문제를 풀었어요!**"]
     blocks.append(
         "#### Baekjoon\n" + table(
-            [("Total", f"**{sa['solved']}**")]
+            [("Total", f"**{sum(boj.values())}**")]
             + [(f'<img src=".github/assets/tier/{BOJ_ICON[t]}.svg" height="18"/><br>{t}',
                 f"**{boj[t]}**") for t in BOJ_TIERS]
         )
@@ -266,8 +270,9 @@ def main():
     except Exception as e:  # solved.ac 응답이 없으면 기존 README를 그대로 둔다
         print(f"solved.ac 조회 실패, README를 바꾸지 않습니다: {e}", file=sys.stderr)
         return
-    new = replace_block(text, "SOLVEDAC", render_solvedac(sa))
-    new = replace_block(new, "STATS", render_stats(collect(), sa))
+    counts = collect()
+    new = replace_block(text, "SOLVEDAC", render_solvedac(sa, sum(counts["boj"].values())))
+    new = replace_block(new, "STATS", render_stats(counts))
     if new != text:
         with open(README, "w", encoding="utf-8") as f:
             f.write(new)
