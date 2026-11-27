@@ -1,14 +1,14 @@
 {
   "_comment": "solved.ac v4 API에서 마지막으로 확인된 값. GitHub Actions에서는 v4가 차단(403)되어 이 값을 기준으로 쓰고, v3가 더 새로운 값을 주면 그걸 쓴다.",
-  "checked": "2026-11-26",
+  "checked": "2026-11-28",
   "tier": 12,
-  "rating": 1050,
-  "solved": 277,
+  "rating": 1061,
+  "solved": 278,
   "by_tier": {
     "Bronze": 165,
     "Silver": 92,
     "Gold": 18,
-    "Platinum": 1,
+    "Platinum": 2,
     "Diamond": 0,
     "Ruby": 0
   }
