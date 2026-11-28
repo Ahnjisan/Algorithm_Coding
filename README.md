@@ -35,7 +35,7 @@ GitHub Actions가 solved.ac와 연동해 아래 **티어 · 스트릭 · 풀이 
 
 | 현재 티어 | AC Rating | 푼 문제 | 현재 스트릭 | 최장 스트릭 |
 |:---:|:---:|:---:|:---:|:---:|
-| <img src=".github/assets/tier/12.svg" height="18"/> **Gold IV** | **1061** | **284** | **9일** | **9일** |
+| <img src=".github/assets/tier/12.svg" height="18"/> **Gold IV** | **1064** | **284** | **9일** | **9일** |
 
 <sub>티어 · 레이팅: solved.ac 기준 · 푼 문제: solved.ac 기록(~2026.04) + 풀이 업로드 · 스트릭: 풀이 업로드(2026.11.20~) 기준</sub>
 <!-- SOLVEDAC:END -->
